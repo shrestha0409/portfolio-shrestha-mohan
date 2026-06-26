@@ -1,25 +1,52 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { FiGithub, FiLinkedin, FiMail, FiSend, FiCheck } from "react-icons/fi";
+import emailjs from "@emailjs/browser";
 
 export default function Contact() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+    const SERVICE_ID = "service_1dtrk1u";
+const TEMPLATE_ID = "template_v3dfvve";
+const PUBLIC_KEY = "crRLrBfMjy0TtNVgR";
 
   const handleChange = (e) =>
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus("sending");
-    // EmailJS integration — replace with your real IDs
-    // import emailjs from '@emailjs/browser';
-    // await emailjs.send("SERVICE_ID","TEMPLATE_ID", form, "PUBLIC_KEY");
-    setTimeout(() => setStatus("sent"), 1500); // Simulated for now
-  };
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  setStatus("sending");
 
+  try {
+    await emailjs.send(
+      SERVICE_ID,
+      TEMPLATE_ID,
+      {
+        name: form.name,
+        email: form.email,
+        message: form.message,
+      },
+      PUBLIC_KEY
+    );
+
+    setStatus("sent");
+
+    setForm({
+      name: "",
+      email: "",
+      message: "",
+    });
+
+    setTimeout(() => {
+      setStatus("idle");
+    }, 3000);
+  } catch (error) {
+    console.error(error);
+    setStatus("error");
+  }
+};
   const socials = [
     { icon: <FiGithub size={20} />, label: "GitHub", href: "https://github.com/shrestha0409", sub: "github.com/shrestha0409" },
     { icon: <FiLinkedin size={20} />, label: "LinkedIn", href: "https://linkedin.com/in/shresthaMohan", sub: "linkedin.com/in/shresthaMohan" },
@@ -111,6 +138,11 @@ export default function Contact() {
                 Thanks! I'll get back to you soon.
               </p>
             )}
+              {status === "error" && (
+  <p className="text-center text-xs text-red-500">
+    Failed to send message. Please try again.
+  </p>
+)}
           </motion.form>
 
           {/* Social links */}

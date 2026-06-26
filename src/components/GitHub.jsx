@@ -1,18 +1,12 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { FiGithub, FiStar, FiGitCommit, FiGitMerge } from "react-icons/fi";
 
-const stats = [
-  { label: "Total Commits", value: "450+", icon: <FiGitCommit />, color: "#22d3ee" },
-  { label: "GitHub Stars", value: "30+", icon: <FiStar />, color: "#8b5cf6" },
-  { label: "Pull Requests", value: "25+", icon: <FiGitMerge />, color: "#10b981" },
-  { label: "Repositories", value: "20+", icon: <FiGithub />, color: "#f59e0b" },
-];
+
 
 export default function GitHub() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
-  const username = "shresthaMohan"; // UPDATE THIS
+  const username = "shrestha0409"; // UPDATE THIS
 
   return (
     <section id="github" className="section-padding relative">
@@ -31,26 +25,6 @@ export default function GitHub() {
             GitHub <span className="text-gradient-cyan">Activity</span>
           </h2>
         </motion.div>
-
-        {/* Stat cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-          {stats.map((s, i) => (
-            <motion.div
-              key={s.label}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.08, duration: 0.5 }}
-              className="glass border border-white/5 rounded-2xl p-5 text-center hover:border-white/10 transition-all group"
-              whileHover={{ y: -3 }}
-            >
-              <div className="flex items-center justify-center mb-3 text-2xl" style={{ color: s.color }}>
-                {s.icon}
-              </div>
-              <div className="font-display font-bold text-2xl text-white mb-1">{s.value}</div>
-              <div className="text-gray-500 text-xs">{s.label}</div>
-            </motion.div>
-          ))}
-        </div>
 
         {/* GitHub cards */}
         <div className="grid md:grid-cols-3 gap-6">

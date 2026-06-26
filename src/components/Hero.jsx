@@ -94,9 +94,9 @@ export default function Hero() {
               className="flex items-center gap-4"
             >
               {[
-                { icon: <FiGithub size={20} />, href: "https://github.com/shresthaMohan", label: "GitHub" },
-                { icon: <FiLinkedin size={20} />, href: "https://linkedin.com/in/shresthaMohan", label: "LinkedIn" },
-                { icon: <FiMail size={20} />, href: "mailto:hello@shresthaMohan.dev", label: "Email" },
+                { icon: <FiGithub size={20} />, href: "https://github.com/shrestha0409", label: "GitHub" },
+                { icon: <FiLinkedin size={20} />, href: "https://www.linkedin.com/in/shrestha-mohan-700246378", label: "LinkedIn" },
+                { icon: <FiMail size={20} />, href: "mailto:shresthamohan0406@gmail.com", label: "Email" },
               ].map(({ icon, href, label }) => (
                 <a
                   key={label}
